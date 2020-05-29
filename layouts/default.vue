@@ -8,6 +8,17 @@
 <script>
 import NavBar from '~/components/NavBar.vue'
 export default {
+  head: {
+    titleTemplate: '%s - Real World Events', // <-- title tag template (%s -> is where our page titles will be placed)
+    meta: [
+      {
+        hid: 'description', //ensures that our page only has one unique description (when navigate between pages)
+        name: 'description', // <-- meta description tag template
+        content:
+          'Where you can find all the events taking place in your neighborhood'
+      }
+    ]
+  },
   components: {
     NavBar
   }
