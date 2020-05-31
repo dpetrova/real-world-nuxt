@@ -29,22 +29,30 @@ export default {
   //       events: response.data
   //     }
   //   })
+  //   .catch(e => {
+  //   error({
+  //     statusCode: 503,
+  //     message: 'Unable to fetch events at this time, please try again'
+  //   })
+  // })
   // },
   //using ES6 destructuring the context object we can take out just the modules we need
-  asyncData({ $axios, error }) {
-    return $axios
-      .get('http://localhost:3000/events')
-      .then(response => {
-        return {
-          events: response.data
-        }
+  async asyncData({ $axios, error }) {
+    try {
+      // const response = await $axios.get('http://localhost:3000/events')
+      // return {
+      //   events: response.data
+      // }
+      const { data } = await $axios.get('http://localhost:3000/events')
+      return {
+        events: data
+      }
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch events events at this time'
       })
-      .catch(e => {
-        error({
-          statusCode: 503,
-          message: 'Unable to fetch events at this time, please try again'
-        })
-      })
+    }
   },
   components: {
     EventCard
